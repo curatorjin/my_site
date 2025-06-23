@@ -1,0 +1,66 @@
+@use "default_colors";
+
+.tab-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tab-container > ul {
+  margin-bottom: 0px;
+}
+
+.tab-nav {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+.tab-item {
+  font-family: Pixel;
+  font-size: 20px;
+  font-weight: normal;
+  padding: 10px 20px;
+  background: default_colors.$light-theme2;
+  border: 4px solid default_colors.$light;;
+  border-bottom: none;
+  transition: color,background-color 0.2s;
+}
+
+.tab-item:hover {
+  background: default_colors.$light-theme1;
+}
+
+.tab-item.active {
+  color: default_colors.$bedecked-side;
+  background: default_colors.$highlight-theme;
+  border-bottom: none;
+}
+
+.tab-content {
+  font-family: Pixel;
+  border: 4px solid default_colors.$light-theme1;
+  background-color: default_colors.$standard-theme;
+  padding: 20px;
+}
+
+.tab-pane {
+  min-height: 1000px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tab-pane.active {
+  display: block;
+  opacity: 1;
+}
+
+.tab-content a {
+  color: default_colors.$bedecked-main;
+}
+
+.tab-content a:visited {
+  color: default_colors.$bedecked-side;
+}

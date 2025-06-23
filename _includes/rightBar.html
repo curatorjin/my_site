@@ -1,0 +1,30 @@
+<div class="right-bar">
+    <div class="post-right">
+        {%- if page.layout == 'post' -%}
+            {%- unless page.sideBar == false -%}
+            <script
+                    src="{{ '/assets/scripts/title.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+            <div class="menu-container">
+                <label class="title">目录</label>
+                <nav class="post-toc">
+                    <ul id="menu"></ul>
+                </nav>
+            </div>
+            {%- endunless -%}
+            <div class="tag-cloud">
+                {% assign all_tags = site.posts | map: "tags" | uniq %}
+                {% for tag in all_tags %}
+                <a href="/assets/tag-detail?tag={{tag}}">{{tag}}</a>
+                {% endfor %}
+            </div>
+        {%- endif -%}
+        {%- if page.layout == 'tag-detail' -%}
+            <div class="tag-cloud">
+                {% assign all_tags = site.posts | map: "tags" | uniq %}
+                {% for tag in all_tags %}
+                <a href="/assets/tag-detail?tag={{tag}}">{{tag}}</a>
+                {% endfor %}
+            </div>
+        {%- endif -%}
+    </div>
+</div>
