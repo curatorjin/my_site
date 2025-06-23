@@ -1,0 +1,13 @@
+title: 星の街
+name: 星の街
+description:
+signature: 早起赶画稿，熬夜写项目
+plugins:
+  - jekyll-feed
+nick_name: 阿金
+nick_name_vcard: CuratorJin
+email: disciple_sneaker@163.com
+baseurl: "/"
+gems: [jekyll-feed, jekyll-seo-tag, jekyll-paginate]
+paginate: 7
+paginate_path: "/page:num/"

@@ -1,0 +1,58 @@
+{%- include head.html -%}
+<body>
+
+{%- include header.html -%}
+
+<div class="container">
+
+	{%- include leftBar.html -%}
+
+	<div class="content" style="padding-bottom:20px">
+		<div class="tab-container">
+			<ul class="tab-nav">
+				<li class="tab-item" data-tab="tab1">开发周报</li>
+				<li class="tab-item" data-tab="tab2">当前项目</li>
+				<li class="tab-item" data-tab="tab3">小玩具</li>
+				<li class="tab-item active" data-tab="tab4">旧日志</li>
+				<li class="tab-item" data-tab="tab5">关于</li>
+			</ul>
+		</div>
+
+		<div class="tab-content">
+			<div class="tab-pane" id="tab1">
+				{%- include weekly.html -%}
+			</div>
+			<div class="tab-pane" id="tab2">
+				{%- include currentProject.html -%}
+			</div>
+			<div class="tab-pane" id="tab3">
+				{%- include toys.html -%}
+			</div>
+			<div class="tab-pane active" id="tab4">
+				<div class="post-content">
+					{% if page.tags.size > 0 %}
+					<a class="button" id="post-return" href="/">返回</a>
+					<div class="tag-cloud" style="margin-top:0px; padding: 0px">
+						<span style="padding:10px; ">相关标签：</span>
+						{% for tag in page.tags %}
+						<a href="/assets/tag-detail?tag={{tag}}">{{tag}}</a>
+						{% endfor %}
+					</div>
+					{% endif %}
+					{{content}}
+				</div>
+			</div>
+			<div class="tab-pane" id="tab5">
+				{%- include weekly.html -%}
+			</div>
+		</div>
+	</div>
+
+	{%- include rightBar.html -%}
+
+</div>
+
+{%- include footer.html -%}
+
+</body>
+</html>

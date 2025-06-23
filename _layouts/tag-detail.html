@@ -1,0 +1,96 @@
+{%- include head.html -%}
+<script>
+	function getQueryVariable(variable)
+	{
+	       var query = window.location.search.substring(1);
+	       var vars = query.split("&");
+	       for (var i=0;i<vars.length;i++) {
+	               var pair = vars[i].split("=");
+	               if(pair[0] == variable){return pair[1];}
+	       }
+	       return(false);
+	}
+	
+	$(function(){
+		{% assign all_tags = site.posts | map: "tags" | uniq %}
+		{% assign date_format = site.minima.date_format | default:"%b %-d, %Y" %} 
+		tagMap = new Map(); 
+        {% for tag in all_tags %}
+        tagMap.set("{{tag |downcase}}", []);
+        {% endfor %}
+		{% for post in site.posts %}
+		  {% for p_tag in post.tags %}
+		    tagMap.get("{{p_tag | downcase}}").push({"title" : "{{post.title}}", "link" :"{{post.url | relative_url}}","meta":"{{ post.date | date: date_format }}" });
+		  {% endfor %}
+		{% endfor %}
+		let tagParam = decodeURIComponent(getQueryVariable("tag"));
+	    if (!tagParam) {
+	    	return;
+	    }
+	    $("#tag-name").html(tagParam + "标签下的文章：");
+	    for (post of tagMap.get(tagParam.toLowerCase())) {
+	    	let item = '<div class="post-item"><h2><a class="post-link" href="'+ post["link"] +'">'+post["title"]+'</a></h2><li><span class="post-meta">'+post["meta"]+'</span></li></div>';
+	    	$(".post-list").append(item);
+	    }
+	});
+</script>
+<body>
+    {%- include header.html -%}
+
+    <div class="container">
+        {%- include leftBar.html -%}
+        <div class="content" style="padding-bottom:20px">
+            <div class="tab-container">
+                <ul class="tab-nav">
+                    <li class="tab-item" data-tab="tab1">开发周报</li>
+                    <li class="tab-item" data-tab="tab2">当前项目</li>
+                    <li class="tab-item" data-tab="tab3">小玩具</li>
+                    <li class="tab-item active" data-tab="tab4">旧日志</li>
+                    <li class="tab-item" data-tab="tab5">关于</li>
+                </ul>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-pane" id="tab1">
+                    {%- include weekly.html -%}
+                </div>
+                <div class="tab-pane" id="tab2">
+                    {%- include currentProject.html -%}
+                </div>
+                <div class="tab-pane" id="tab3">
+                    {%- include toys.html -%}
+                </div>
+                <div class="tab-pane active" id="tab4">
+                    <div class="post-list-view">
+                        <h2 id="tag-name">{{ page.tag }}标签下的文章：</h2>
+                        <div class="post-list">
+                            {% for post in page.posts %}
+                            <div class="post-item">
+                                <h2>
+                                    <a class="post-link" href="{{ post.url | relative_url }}"> {{
+                                        post.title }} </a>
+                                </h2>
+                                <li>
+                                    {%- assign date_format = site.minima.date_format | default:"%b %-d, %Y" -%}
+                                    <span class="post-meta">{{ post.date | date: date_format }}</span>
+                                </li>
+                                <li>
+                                    <span class="post-excerpt">{{ post.excerpt | strip_html }}</span>
+                                </li>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab5">
+                    {%- include weekly.html -%}
+                </div>
+            </div>
+        </div>
+        {%- include rightBar.html -%}
+    </div>
+
+    {%- include footer.html -%}
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+{%- include head.html -%}
+<body>
+
+	{%- include header.html -%}
+
+	<div class="container">
+	
+		{%- include leftBar.html -%}
+		
+        <div class="content" style="padding-bottom:20px">
+			<div class="tab-container">
+				<ul class="tab-nav">
+				<li class="tab-item active" data-tab="tab1">开发周报</li>
+				<li class="tab-item" data-tab="tab2">当前项目</li>
+				<li class="tab-item" data-tab="tab3">小玩具</li>
+				<li class="tab-item" data-tab="tab4">旧日志</li>
+				<li class="tab-item" data-tab="tab5">关于</li>
+				</ul>
+			</div>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab1">
+					{%- include weekly.html -%}
+				</div>
+				<div class="tab-pane" id="tab2">
+					{%- include currentProject.html -%}
+				</div>
+				<div class="tab-pane" id="tab3">
+					{%- include toys.html -%}
+				</div>
+				<div class="tab-pane" id="tab4">
+					{%- include archived.html -%}
+				</div>
+				<div class="tab-pane" id="tab5">
+					{%- include weekly.html -%}
+				</div>
+			</div>
+		</div>
+
+		{%- include rightBar.html -%}
+
+	</div>
+
+	{%- include footer.html -%}
+
+</body>
+</html>
