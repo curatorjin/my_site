@@ -1,36 +1,35 @@
-<div class="post-list-view">
-  <div class="post-list">
-    {%- for post in site.posts -%}
-    <div class="post-item">
-      <h2>
-        <a class="post-link" href="{{ post.url | relative_url }}"> {{
-          post.title }} </a>
-      </h2>
-      <li>
-        {%- assign date_format = site.minima.date_format | default:"%b %-d, %Y" -%}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-      </li>
-      <li>
-        <span class="post-excerpt">{{ post.excerpt | strip_html }}</span>
-      </li>
-    </div>
-    {%- endfor -%}
-  </div>
-  {% if paginator.total_pages > 1 %}
-  <div class="post-pagination">
-    {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="previous">Prev</a>
-    {% else %}
-    <span class="previous" class="previous">Prev</span>
-    {% endif %}
+<div class="post-cards">
+  {%- assign log_posts = "" | split: "" -%}
+  {%- for post in site.posts -%}
+    {%- unless post.categories contains '周报' -%}
+      {%- assign log_posts = log_posts | push: post -%}
+    {%- endunless -%}
+  {%- endfor -%}
+  {%- for post in log_posts -%}
+  <article class="post-card">
+    <h2><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
+    {%- assign excerpt = post.excerpt | strip_html | strip -%}
+    {%- if excerpt != "" -%}
+    <div class="post-excerpt">{{ excerpt }}</div>
+    {%- endif -%}
+  </article>
+  {%- endfor -%}
+</div>
+{% if paginator.total_pages > 1 %}
+<div class="post-pagination">
+  {% if paginator.previous_page %}
+  <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="previous">Prev</a>
+  {% else %}
+  <span class="previous">Prev</span>
+  {% endif %}
 
-    <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  <span class="page_number">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
 
-    {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="next">Next</a>
-    {% else%}
-    <span class="next">Next</span>
-    {% endif %}
-  </div>
+  {% if paginator.next_page %}
+  <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="next">Next</a>
+  {% else %}
+  <span class="next">Next</span>
   {% endif %}
 </div>
+{% endif %}

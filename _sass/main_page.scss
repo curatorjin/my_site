@@ -8,18 +8,21 @@ $side-bar-width: 300px !default;
   font-family: "Pixel";
   src: url("../font/8px.woff2");
   font-weight: lighter;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Pixel";
   src: url("../font/10px.woff2");
   font-weight: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Pixel";
   src: url("../font/12px.woff2");
   font-weight: bold;
+  font-display: swap;
 }
 
 body {
@@ -36,11 +39,11 @@ body {
 }
 
 #my-logo img {
-    width: 170px;
+    width: 110px;
     border-radius: 50%;
     border: 5px solid default_colors.$bedecked-side;
-    margin-left: calc(($side-bar-width - 170px) / 2) - 5px;
-    margin-right: calc(($side-bar-width - 170px) / 2) - 5px;
+    margin-left: calc(($side-bar-width - 110px) / 2) - 5px;
+    margin-right: calc(($side-bar-width - 110px) / 2) - 5px;
 }
 
 .left-bar {
@@ -58,16 +61,16 @@ body {
 
 .content {
   width: $content-width - 40px;
-  min-height: 800px;
-  padding: 40px 20px 150px;
+  min-height: 640px;
+  padding: 40px 20px 40px;
   color: default_colors.$word;
   background: default_colors.$light-theme2;
   overflow:hidden;
 }
 
 .post-content {
-  min-height: 800px;
-  padding: 40px 20px 150px;
+  min-height: 640px;
+  padding: 40px 20px 60px;
   color: default_colors.$word;
   background-color: default_colors.$word-bg;
   font-family: Pixel;
@@ -76,7 +79,10 @@ body {
 }
 
 #post-return {
-  margin-left: 800px;
+  display: table;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 20px;
 }
 
 .post-right {
@@ -235,18 +241,18 @@ header {
 	padding: 10px;
 	display: flex;
 	max-width: $content-width + calc($side-bar-width * 2);
-    height: 180px;
+    height: 140px;
 }
 
 #header-lightbox {
   font-family: Pixel;
   font-weight: lighter;
-  font-size: 50px;
+  font-size: 44px;
   width: $content-width - 50px;
-  height: 150px;
+  height: 110px;
   margin-left: 25px;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   background-color: default_colors.$dark;
   color: default_colors.$word;
   overflow: hidden;
@@ -277,7 +283,7 @@ header {
 
 #header-lightbox :nth-child(3) {
   z-index: 1;
-  top: 138px;
+  top: 98px;
   left: 0;
   width: 100%;
   height: 4px;
@@ -287,7 +293,7 @@ header {
 
 #header-lightbox :nth-child(4) {
   z-index: 0;
-  top: 134px;
+  top: 94px;
   left: 0;
   width: 100%;
   height: 4px;
@@ -334,7 +340,7 @@ header {
 
 //内容
 #header-lightbox :nth-child(9) {
-  top: -615px;
+  top: -455px;
   left: 50px;
   width: 100%;
   height: 100%;
@@ -485,32 +491,56 @@ header {
     justify-content: center;
 }
 
-// 目录展示
-.post-list-view {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+// 旧日志/周报：文章卡片（每行 1 个）
+.post-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 10px 0;
 }
 
-.post-list {
-    display: flex;
-    align-self: flex-start;
-    flex-direction: column;
-}
+.post-card {
+  font-family: Pixel;
+  padding: 16px 20px;
+  color: default_colors.$word;
+  background-color: default_colors.$word-bg;
+  border: 3px ridge default_colors.$light;
+  border-radius: 10px;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
 
-.post-item {
-    min-height: 120px;
-    padding-left: 2em;
-    margin-top: 10px;
-}
+  h2 {
+    margin: 0 0 6px;
+    font-size: 1.15em;
+  }
 
-.post-item a{
+  a.post-link {
     text-decoration: none;
-    margin-bottom: 10px;
+  }
+
+  .post-meta {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  .post-excerpt {
+    margin-top: 2px;
+  }
+
+  p {
+    text-indent: 0;
+    margin: 0;
+  }
+
+  &:hover {
+    transform: translate(-2px, -2px);
+    border-color: default_colors.$highlight-theme;
+    box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.45);
+  }
 }
 
-.post-item li {
-    list-style-type: none;
+.post-pagination {
+  text-align: center;
+  margin-top: 16px;
 }
 
 .post-pagination .previous{
@@ -566,5 +596,198 @@ header {
   }
   50% {
     opacity: 0;
+  }
+}
+
+// 页脚小字
+.footer-note {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: lighter;
+  color: default_colors.$light;
+}
+
+// 当前项目：项目卡片网格（每行 2 个）
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.project-card {
+  font-family: Pixel;
+  padding: 18px 20px;
+  color: default_colors.$word;
+  background-color: default_colors.$word-bg;
+  border: 4px ridge default_colors.$light;
+  border-radius: 10px;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+
+  h3 {
+    margin: 0 0 10px;
+  }
+
+  p {
+    text-indent: 0;
+    line-height: 1.9;
+    margin: 0;
+  }
+
+  &:hover {
+    transform: translate(-2px, -2px);
+    border-color: default_colors.$highlight-theme;
+    box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.45);
+  }
+}
+
+.project-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: normal;
+  padding: 2px 10px 3px;
+  margin-left: 8px;
+  vertical-align: middle;
+  border-radius: 3px;
+}
+
+.badge-进行中 {
+  color: default_colors.$dark;
+  background-color: default_colors.$highlight-theme;
+}
+
+.badge-规划中 {
+  color: default_colors.$word;
+  background-color: default_colors.$light-theme2;
+}
+
+.badge-已完结 {
+  color: default_colors.$dark;
+  background-color: default_colors.$light;
+}
+
+// 关于
+.about-view {
+  font-family: Pixel;
+  padding: 10px 15px;
+  h2 {
+    margin-bottom: 8px;
+  }
+  p {
+    text-indent: 0;
+    line-height: 1.9;
+  }
+  .about-signature {
+    color: default_colors.$bedecked-side;
+  }
+}
+
+.post-meta {
+  font-weight: lighter;
+  color: default_colors.$light;
+}
+
+// 移动端适配
+@media (max-width: 900px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1500px) {
+  .container {
+    flex-wrap: wrap;
+    padding: 0 12px;
+  }
+
+  .left-bar,
+  .right-bar {
+    min-width: 0;
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  #my-logo img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  #self-info {
+    margin: 20px auto;
+    max-width: $content-width - 100px;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .right-bar .tag-cloud {
+    max-width: none;
+  }
+
+  .post-right {
+    position: static;
+    padding-top: 20px;
+    width: 100%;
+  }
+
+  .menu-container {
+    width: auto;
+  }
+
+  #header-bar {
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #header-lightbox {
+    width: 90%;
+    font-size: 30px;
+    height: 80px;
+  }
+
+  #header-lightbox :nth-child(3) {
+    top: 68px;
+  }
+
+  #header-lightbox :nth-child(4) {
+    top: 64px;
+  }
+
+  #header-lightbox :nth-child(7),
+  #header-lightbox :nth-child(8) {
+    left: calc(90% - 6px);
+  }
+
+  #header-lightbox :nth-child(9) {
+    top: -331px;
+    left: 30px;
+  }
+
+  .tab-item {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .project-status {
+    max-width: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .tab-nav {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .post-content {
+    padding: 20px 12px 40px;
+    font-size: 16px;
+  }
+
+  #header-lightbox {
+    font-size: 24px;
   }
 }

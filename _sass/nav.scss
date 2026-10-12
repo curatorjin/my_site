@@ -25,7 +25,7 @@
   background: default_colors.$light-theme2;
   border: 4px solid default_colors.$light;;
   border-bottom: none;
-  transition: color,background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .tab-item:hover {
@@ -46,7 +46,7 @@
 }
 
 .tab-pane {
-  min-height: 1000px;
+  min-height: 420px;
   display: none;
   opacity: 0;
   transition: opacity 0.3s;

@@ -1,1 +1,17 @@
-周报
+<div class="post-cards">
+  {%- assign weekly_posts = site.posts | where_exp: "post", "post.categories contains '周报'" -%}
+  {%- for post in weekly_posts limit: 8 -%}
+  <article class="post-card">
+    <h2><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
+    {%- assign excerpt = post.excerpt | strip_html | strip -%}
+    {%- if excerpt != "" -%}
+    <div class="post-excerpt">{{ excerpt }}</div>
+    {%- endif -%}
+  </article>
+  {%- else -%}
+  <div class="post-card">
+    <p>第一篇周报还在路上。</p>
+  </div>
+  {%- endfor -%}
+</div>
