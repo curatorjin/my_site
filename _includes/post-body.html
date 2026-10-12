@@ -1,0 +1,12 @@
+<div class="post-content">
+	{% if page.tags.size > 0 %}
+	<a class="button" id="post-return" href="/">返回</a>
+	<div class="tag-cloud" style="margin-top:0px; padding: 0px">
+		<span style="padding:10px; ">相关标签：</span>
+		{% for tag in page.tags %}
+		<a href="/assets/tag-detail?tag={{tag}}">{{tag}}</a>
+		{% endfor %}
+	</div>
+	{% endif %}
+	{{content}}
+</div>
